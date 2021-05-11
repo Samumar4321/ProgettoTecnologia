@@ -1,0 +1,3 @@
+Preset1;grassa;30;10;45
+Preset2;magra;25;3;32
+Preset3;grassa;30;10;45
