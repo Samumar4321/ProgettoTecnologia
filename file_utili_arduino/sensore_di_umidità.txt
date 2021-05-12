@@ -1,0 +1,2 @@
+I valori andranno da 1023 (sensore fuori dal terreno), 800-900 (terreno secco) , 150-300 (terreno molto bagnato).
+https://www.progettiarduino.com/19-arduino-sensore-umiditagrave-terreno.html
