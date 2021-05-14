@@ -9,8 +9,9 @@ string(CSV preset)
 Arduino --> Java:
 -----------------------------------
 
-string(umidità);string(fotoresistenza);string(temp)
+string(umidità)-string(fotoresistenza)-string(temp);
 
 -----------------------------------
 
-preset = umidità(max and min);temp(max and min);luce(range) 
+preset = umidità(max and min)-temp(max and min)-luce(range); 
+umMax-umMin-tempMax-tempMin-lumMax-lumMin;
