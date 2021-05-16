@@ -16,6 +16,7 @@ int luceMax = 0;
 int luceMin = 0;
 int umMax = 0;
 int umMin = 0;
+char stato = " ";
 
 
 
@@ -38,9 +39,40 @@ void loop() {
 
  invioDati(umiditySensorValue,lum,tempValue);
 
- controlloLuce();
- controlloBuzzer();
+ controlloLuce&Buzzer();
 }
+
+void controlloLuce&Buzzer()
+{
+  if(umiditySensorValue<umMin || umiditySensorValue>umMax)
+  {
+    digitalWrite(ledR,HIGH);
+    tone(buzzer,400);
+  }else
+  {
+    digitalWrite(ledR,LOW);
+    noTone(buzzer);
+  }
+  if(cent<tempMin || cent>tempMax)
+  {
+    digitalWrite(ledR,HIGH);
+    tone(buzzer,400);
+  }else
+  {
+    digitalWrite(ledR,LOW);
+    noTone(buzzer);
+  }
+  if(lum<luceMin || lum>luceMax)
+  {
+    digitalWrite(ledR,HIGH);
+    tone(buzzer,400);
+  }else
+  {
+    digitalWrite(ledR,LOW);
+    noTone(buzzer);
+  }
+}
+
 
 void setVariabili()
 {
@@ -82,6 +114,7 @@ void leggiSeriale()
 {
   char term1 = '-';
   char term2 = ';';
+  stato = leggiFino(term1);
   umMax = leggiFino(term1).toInt();
   umMin = leggiFino(term1).toInt();
   tempMax = leggiFino(term1).toInt();
