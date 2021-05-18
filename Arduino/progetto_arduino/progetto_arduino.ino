@@ -1,13 +1,20 @@
+#include <DHT.h>
+#include "DHT.h"
+
 //definizione sensore umidità
 int umiditySensorValue = 0;
 //definizione fotoresistenza
-int lum = 0;
+const int lum = A1;
+int luminosita = 0;
 //definizione temperatura
 int tempValue = 0;
 int cent = 0;
 //definizione led
 #define ledR 8
 #define buzzer 7
+#define DHTPIN 12
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
 
 //definizione variabili
 int tempMax = 0;
@@ -16,33 +23,31 @@ int luceMax = 0;
 int luceMin = 0;
 int umMax = 0;
 int umMin = 0;
-char stato = " ";
-
-
+String stato = " ";
 
 
 void setup() {
   pinMode(ledR,OUTPUT);
   pinMode(buzzer,OUTPUT);
+  pinMode(lum, INPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  char c = ' ';
+  /*String c = "";
   c = leggiFino(';');
-  if(c == 's')
+  if(c == "s")
   {
       leggiSeriale();
-  }
-
+  }*/
   setVariabili();
 
- invioDati(umiditySensorValue,lum,tempValue);
+  invioDati(umiditySensorValue,luminosita,tempValue);
 
- controlloLuce&Buzzer();
+  //controlloLuceEBuzzer();
 }
 
-void controlloLuce&Buzzer()
+void controlloLuceEBuzzer()
 {
   if(umiditySensorValue<umMin || umiditySensorValue>umMax)
   {
@@ -73,11 +78,10 @@ void controlloLuce&Buzzer()
   }
 }
 
-
 void setVariabili()
 {
   umiditySensorValue = VUmidita();
-  lum = VLuminosita();
+  luminosita = VLuminosita();
   tempValue = VTemp();
 }
 
@@ -86,29 +90,29 @@ int VUmidita()
   int um = analogRead(A0);
   return um;
 }
+
 int VTemp()
 {
-  tempValue = analogRead(A2);
-  cent = ((tempValue * 0.00488) - 0.5) / 0.01;
-  return cent;
-   
+  int t = dht.readTemperature();
+  return t;
 }
+
 int VLuminosita()
 {
-  lum = analogRead(A1);
-  return lum;
+  int val = 0;
+  val = analogRead(lum);
+  return val;
 }
+
 void invioDati(int umiditySensorValue, int lum, int cent)
 {
-  String csv="";
+  String csv = "";
   String u = String(umiditySensorValue);
   String l = String(lum);
   String t = String(cent);
   csv = u + ";" + l + ";" + t+ ";";
   Serial.println(csv);
 }
-
-
 
 void leggiSeriale()
 {
