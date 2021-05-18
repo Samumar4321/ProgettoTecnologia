@@ -1,7 +1,7 @@
 # ProgettoTecnologia
 Gruppo formato da Marelli Samuele, Cassina Giorgio, Bonfissuto Luca, Facciani Alessandro e Sala Kevin.
 
-Progetto tecnologia 
+Branch contenente il codice finale del progetto.
 
 Nella cartella Arduino è presente il codice finale di Arduino.
 
