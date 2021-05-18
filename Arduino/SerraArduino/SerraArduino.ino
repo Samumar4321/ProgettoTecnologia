@@ -8,7 +8,6 @@ const int lum = A1;
 int luminosita = 0;
 //definizione temperatura
 int tempValue = 0;
-int cent = 0;
 //definizione led
 #define ledR 8
 #define buzzer 7
@@ -88,7 +87,8 @@ void setVariabili()
 int VUmidita()
 {
   int um = analogRead(A0);
-  return um;
+  int valMap=map(um,0,1024,0,100);
+  return valMap;
 }
 
 int VTemp()
@@ -100,18 +100,38 @@ int VTemp()
 int VLuminosita()
 {
   int val = 0;
-  val = analogRead(lum);
+  val = analogRead(A1);
   return val;
 }
 
-void invioDati(int umiditySensorValue, int lum, int cent)
+void invioDati(int umiditySensorValue, int luminosita, int tempValue)
 {
   String csv = "";
   String u = String(umiditySensorValue);
-  String l = String(lum);
-  String t = String(cent);
-  csv = u + ";" + l + ";" + t+ ";";
-  Serial.println(csv);
+  if(umiditySensorValue>=100){
+    u = String(umiditySensorValue);
+  }
+  else if(umiditySensorValue>=10){
+    u = "0" + String(umiditySensorValue);
+  }
+  else if(umiditySensorValue<10){
+    u = "00" + String(umiditySensorValue);
+  }
+  
+  String l = "";
+  if(luminosita>=100){
+    l = String(luminosita);
+  }
+  else if(luminosita>=10){
+    l = "0" + String(luminosita);
+  }
+  else if(luminosita<10){
+    l = "00" + String(luminosita);
+  }
+  String t = String(tempValue);
+  csv = u + ";" + l + ";" + t + ";";
+  Serial.print(csv);
+  delay(1000);
 }
 
 void leggiSeriale()
