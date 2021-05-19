@@ -1,0 +1,2 @@
+Pianta_Comune_1;Pianta comune;70;30;700;25;15
+Pianta_Grassa_1;Pianta grassa;30;10;700;17;50

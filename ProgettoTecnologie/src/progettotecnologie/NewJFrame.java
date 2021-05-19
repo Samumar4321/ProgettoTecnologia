@@ -1,0 +1,300 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package progettotecnologie;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author User
+ */
+public class NewJFrame extends javax.swing.JFrame {
+
+    /**
+     * Creates new form NewJFrame
+     */
+    ThreadDisegna td;
+    Presets pres;
+    NewJFrame f;
+
+    public NewJFrame() {
+        initComponents();
+        this.setSize(600, 450);
+        td = new ThreadDisegna(this, txtLuce, txtTmax, txtTmin, txtUmax, txtUmin, btnSalva);
+        td.start();
+        Reader read = new Reader("presets.txt");
+        pres = read.ReadFromFile();
+        f = this;
+        cmbTipo.addItem("Pianta grassa");
+        cmbTipo.addItem("Pianta comune");
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        td.setFinito(false);
+
+        Image immagine = createImage(this.getWidth(), this.getHeight());
+        Graphics gImmagine = immagine.getGraphics();
+        gImmagine.clearRect(0, 0, this.getWidth(), this.getHeight());
+
+        super.paint(gImmagine); //To change body of generated methods, choose Tools | Templates.
+        //Tmax
+        if (td.isTmax() == true) {
+            gImmagine.setColor(Color.green);
+
+            gImmagine.fillOval(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 10, txtTmax.getHeight() / 2, txtTmax.getHeight() / 2);
+
+        } else {
+            gImmagine.setColor(Color.red);
+            gImmagine.fillOval(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 10, txtTmax.getHeight() / 2, txtTmax.getHeight() / 2);
+            //g.drawRect(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 5, txtTmax.getHeight()/2, txtTmax.getHeight()/2);
+        }
+        //Tmin
+        if (td.isTmin() == true) {
+            gImmagine.setColor(Color.green);
+
+            gImmagine.fillOval(txtTmin.getX() + txtTmin.getWidth() + 10, txtTmin.getY() + txtTmin.getHeight() + 10, txtTmin.getHeight() / 2, txtTmin.getHeight() / 2);
+
+        } else {
+            gImmagine.setColor(Color.red);
+            gImmagine.fillOval(txtTmin.getX() + txtTmin.getWidth() + 10, txtTmin.getY() + txtTmin.getHeight() + 10, txtTmin.getHeight() / 2, txtTmin.getHeight() / 2);
+            //g.drawRect(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 5, txtTmax.getHeight()/2, txtTmax.getHeight()/2);
+        }
+        //Umax
+        if (td.isUmax() == true) {
+            gImmagine.setColor(Color.green);
+
+            gImmagine.fillOval(txtUmax.getX() + txtUmax.getWidth() + 10, txtUmax.getY() + txtUmax.getHeight() + 10, txtUmax.getHeight() / 2, txtUmax.getHeight() / 2);
+
+        } else {
+            gImmagine.setColor(Color.red);
+            gImmagine.fillOval(txtUmax.getX() + txtUmax.getWidth() + 10, txtUmax.getY() + txtUmax.getHeight() + 10, txtUmax.getHeight() / 2, txtUmax.getHeight() / 2);
+            //g.drawRect(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 5, txtTmax.getHeight()/2, txtTmax.getHeight()/2);
+        }
+        //Umin
+        if (td.isUmin() == true) {
+            gImmagine.setColor(Color.green);
+
+            gImmagine.fillOval(txtUmin.getX() + txtUmin.getWidth() + 10, txtUmin.getY() + txtUmin.getHeight() + 10, txtUmin.getHeight() / 2, txtUmin.getHeight() / 2);
+
+        } else {
+            gImmagine.setColor(Color.red);
+            gImmagine.fillOval(txtUmin.getX() + txtUmin.getWidth() + 10, txtUmin.getY() + txtUmin.getHeight() + 10, txtUmin.getHeight() / 2, txtUmin.getHeight() / 2);
+            //g.drawRect(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 5, txtTmax.getHeight()/2, txtTmax.getHeight()/2);
+        }
+        //luce
+        if (td.isLuce() == true) {
+            gImmagine.setColor(Color.green);
+
+            gImmagine.fillOval(txtLuce.getX() + txtLuce.getWidth() + 10, txtLuce.getY() + txtLuce.getHeight() + 10, txtLuce.getHeight() / 2, txtLuce.getHeight() / 2);
+
+        } else {
+            gImmagine.setColor(Color.red);
+            gImmagine.fillOval(txtLuce.getX() + txtLuce.getWidth() + 10, txtLuce.getY() + txtLuce.getHeight() + 10, txtLuce.getHeight() / 2, txtLuce.getHeight() / 2);
+            //g.drawRect(txtTmax.getX() + txtTmax.getWidth() + 10, txtTmax.getY() + txtTmax.getHeight() + 5, txtTmax.getHeight()/2, txtTmax.getHeight()/2);
+        }
+
+        g.drawImage(immagine, 0, 0, this);
+        td.setFinito(true);
+    }
+
+    /**
+     * Creates new form JFrame
+     */
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel3 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtUmax = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtUmin = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtLuce = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtTmax = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtTmin = new javax.swing.JTextField();
+        cmbTipo = new javax.swing.JComboBox<>();
+        btnSalva = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+
+        jLabel3.setText("Tipo");
+
+        jLabel8.setText("Temperatura massima");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Nome");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 33, 90, -1));
+
+        jLabel2.setText("Tipo");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 61, -1, -1));
+
+        jLabel4.setText("Umidità massima");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+        getContentPane().add(txtUmax, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 32, 100, -1));
+
+        jLabel5.setText("Umidita minima");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 64, -1, -1));
+        getContentPane().add(txtUmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 86, 100, -1));
+
+        jLabel6.setText("Luce ideale");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 116, -1, -1));
+        getContentPane().add(txtLuce, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 138, 90, -1));
+
+        jLabel7.setText("Temperatura massima");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 64, -1, -1));
+        getContentPane().add(txtTmax, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 86, 130, -1));
+
+        jLabel9.setText("Temperatura minima");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        getContentPane().add(txtTmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 32, 130, -1));
+
+        getContentPane().add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 83, 90, -1));
+
+        btnSalva.setText("SALVA");
+        btnSalva.setEnabled(false);
+        btnSalva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvaMouseClicked(evt);
+            }
+        });
+        btnSalva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalva, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 128, 283, 207));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 235, -1, -1));
+
+        jButton1.setText("HOME");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 363, 90, 40));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaActionPerformed
+
+    }//GEN-LAST:event_btnSalvaActionPerformed
+
+    private void btnSalvaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvaMouseClicked
+        Preset temp = new Preset();
+        temp.setNome(txtNome.getText());
+        temp.setUmax(Integer.parseInt(txtUmax.getText()));
+        temp.setUmin(Integer.parseInt(txtUmin.getText()));
+        temp.setTempMax(Integer.parseInt(txtTmax.getText()));
+        temp.setTempMin(Integer.parseInt(txtTmin.getText()));
+        temp.setTipo(cmbTipo.getSelectedItem().toString());
+        temp.setLuceIdeale(Integer.parseInt(txtLuce.getText()));
+        pres.add(temp);
+        Writer write = new Writer("presets.txt");
+        write.WriteToFile(pres);
+        JOptionPane.showMessageDialog(f, "Preset salvato");
+    }//GEN-LAST:event_btnSalvaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SelezionaAzione sa = new SelezionaAzione();
+        this.hide();
+        sa.show();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewJFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalva;
+    private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField txtLuce;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTmax;
+    private javax.swing.JTextField txtTmin;
+    private javax.swing.JTextField txtUmax;
+    private javax.swing.JTextField txtUmin;
+    // End of variables declaration//GEN-END:variables
+}
